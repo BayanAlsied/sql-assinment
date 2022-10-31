@@ -1,0 +1,26 @@
+--select  ename,sal , trunc(last_day(sysdate)-trunc(sysdate,'MONTH'))+1,trunc(sysdate,'MONTH'),last_day(sysdate)-sysdate, sysdate-trunc(sysdate,'MONTH') ,sal/(last_day(sysdate)-trunc(sysdate,'MONTH'))from scott.emp
+DECLARE
+x  number;
+ function sal_per_day 
+(p_date date ,sal_month number )
+return number is
+day_in_mounth number:= 30;
+sal_per_days number := 500;
+number_of_days number :=15;
+salaryreturn number:=77;
+begin
+
+day_in_mounth := trunc(last_day(p_date)-trunc(p_date,'MONTH'))+1;
+sal_per_days  := sal_month/day_in_mounth;
+number_of_days  :=trunc(last_day(p_date)-trunc(p_date,'MONTH'))+1;
+salaryreturn :=number_of_days * sal_per_days;
+
+dbms_output.put_line('Value of :day_in_mounth   '||day_in_mounth||'   number_of_days  '||number_of_days||'  salaryreturn   '||salaryreturn||' sal_per_days   ' ||sal_per_days);
+return salaryreturn;
+end ;
+BEGIN 
+  
+   x := sal_per_day(sysdate, 100); 
+   dbms_output.put_line(' sal per day  ' || x); 
+END; 
+ 
